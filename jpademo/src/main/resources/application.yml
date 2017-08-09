@@ -1,0 +1,65 @@
+spring:
+  profiles:
+    include: app_config
+  application:
+    name: wzbc #该值用来作为InquiryBankController具体实现类Controller的@RequestMapping前缀，不同接入行配置不同的applicationName
+  datasource:
+    name: account_dispatcher_test
+    url: jdbc:mysql://10.10.13.7:3306/account_dispatcher?autoReconnect=true&useUnicode=yes&characterEncoding=UTF-8
+    username: devuser
+    password: devuser
+    initialize: true
+    sql-script-encoding: utf-8
+    platform: mysql
+    continue-on-error: false
+    separator: //
+    driver-class-name: com.mysql.jdbc.Driver
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    max-active: 100
+    max-idle: 10
+    min-idle: 10
+    initial-size: 15
+  jpa:
+    open-in-view: true
+    show-sql: true
+    database-platform: MYSQL
+    database: mysql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+        hibernate:
+          format_sql: true
+          dialect: org.hibernate.dialect.MySQL5Dialect
+  data:
+    jpa:
+      repositories:
+        enabled: true
+
+
+#logging:
+#  level: debug
+server:
+  port: 9090
+  # 默认 /
+  # context-path: /
+  display-name: machine-account
+  session:
+    # session过期时间，秒单位
+    timeout: 6000
+  error:
+    path: /404.html
+
+management:
+  security:
+    enabled: false
+
+
